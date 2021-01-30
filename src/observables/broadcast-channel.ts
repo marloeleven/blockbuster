@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { IBroadcastChannels } from 'types';
 
-export const createMessageChannel = (channelName: IBroadcastChannels) => {
-  const obs = new Observable((observer) => {
+export const createMessageChannel = (channelName: IBroadcastChannels) =>
+  new Observable((observer) => {
     const chan = new BroadcastChannel(channelName);
     chan.onmessage = (event) => observer.next(event.data);
     chan.onmessageerror = (error) =>
@@ -10,9 +10,6 @@ export const createMessageChannel = (channelName: IBroadcastChannels) => {
 
     return () => chan.close();
   });
-
-  return obs;
-};
 
 export const createSenderChannel = (channelName: IBroadcastChannels) => {
   const channel = new BroadcastChannel(channelName);

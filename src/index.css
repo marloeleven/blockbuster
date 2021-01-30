@@ -5,9 +5,127 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html,
+body,
+#root,
+.game {
+  height: 100%;
+  width: 100%;
+}
+
+/* GRID */
+
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  --aspect-ratio: 4/3;
+  height: 0;
+  height: 100%;
+  width: 13vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-top: -3vh;
+}
+
+.row:nth-child(2n) .item:first-child {
+  margin-left: 7vh;
+}
+
+.row:first-child {
+  margin-top: auto;
+}
+
+.row .item {
+  margin-right: 1vh;
+}
+
+.row .item:last-child {
+  margin-right: 0;
+}
+
+.row:nth-child(1n + 2) .item:first-child path,
+.row:nth-child(1n + 2) .item:last-child path {
+  fill: #066bbb;
+}
+
+.row:first-child path,
+.row:first-child path,
+.row:last-child path,
+.row:last-child path,
+.row:last-child .item:first-child path,
+.row:last-child .item:last-child path {
+  fill: #920004;
+}
+
+svg path {
+  fill: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  font-size: 5vh;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex-grid__list {
+  --cols: 7;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+/*
+.hex-grid__content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+  padding: 2rem 25%;
+}
+
+.hex-grid__list {
+  --amount: 5;
+  --counter: 1;
+  display: grid;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(var(--amount), 1fr, 2fr) 1fr;
+  grid-gap: 1rem 2rem;
+}
+*/

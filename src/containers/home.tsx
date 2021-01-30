@@ -1,3 +1,5 @@
 import React from 'react';
 
-export default () => <>Start</>;
+import Game from './game';
+
+export default () => <Game />;
