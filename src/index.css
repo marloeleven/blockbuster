@@ -200,4 +200,24 @@ svg path {
 .list li {
 }
 
+.question {
+  background-color: #ffc75f;
+  color: black;
+  font-weight: bold;
+  border: 5px solid #f5deb3;
+  padding: 10px 30px;
+  font-size: 2vh;
+}
+
+.game-question {
+  min-width: 50%;
+  transform: translateY(-7vh);
+}
+
+.game-answer {
+  transform: translateY(7vh);
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
 @tailwind utilities;

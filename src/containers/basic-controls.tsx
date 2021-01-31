@@ -7,7 +7,7 @@ import { ITeams } from 'types';
 import * as appActions from 'app/slices/app';
 import clsx from 'clsx';
 
-export default () => {
+export default function BasicControl() {
   const isRunning = useSelector(appActions.get.isRunning);
   const selectedLetter = useSelector(appActions.get.selectedLetter);
 
@@ -150,4 +150,4 @@ export default () => {
       </div>
     </div>
   );
-};
+}

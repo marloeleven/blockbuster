@@ -129,7 +129,7 @@ export const GameContext = React.createContext<IGameContext>({
   onSelectLetter: noop,
 });
 
-export default function () {
+export default function Game() {
   const lettersArray = useSelector(appActions.get.letters);
   const question = useSelector(appActions.get.question);
   const isQuestionVisible = useSelector(appActions.get.isQuestionVisible);
@@ -152,7 +152,10 @@ export default function () {
     >
       <div className="relative">
         <Hexagons lettersArray={lettersArray} />;
-        <QuestionModal defaultStyle={false} className="h-2/4" />
+        <QuestionModal
+          defaultStyle={false}
+          className="h-full flex justify-center items-center flex-col text-center"
+        />
       </div>
     </GameContext.Provider>
   );

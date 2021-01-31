@@ -23,12 +23,17 @@ export const QuestionModal: React.FC<BaseModalArgs> = ({
 
   return (
     <>
-      <div className="game-question">
+      <div className="game-question question">
         <span className="mb-4 mt-2">Question:</span>
         <p>{question}</p>
       </div>
 
-      <div className={clsx({ hidden: !isAnswerVisible }, 'game-answer')}>
+      <div
+        className={clsx(
+          { 'opacity-0': !isAnswerVisible },
+          'game-answer question'
+        )}
+      >
         <span>Answer:</span>
         <p>{answer}</p>
       </div>

@@ -8,7 +8,7 @@ import { IGameWindowEvents } from 'types';
 
 import BasicControls from './basic-controls';
 
-export default () => {
+function GameControls() {
   const [isWindowOpen, setWindowOpen] = useState(false);
 
   const onOpenWindow = useCallback(() => {
@@ -53,4 +53,6 @@ export default () => {
       </div>
     </div>
   );
-};
+}
+
+export default GameControls;

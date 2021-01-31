@@ -86,12 +86,7 @@ const Dialog: React.FC<IDialogProps> = ({
           className,
           !className &&
             'w-11/12 sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-6/12 max-w-screen-xl',
-          'focus:outline-none',
-          css({
-            margin: '0 auto',
-            top: '50%',
-            transform: 'translateY(-50%)',
-          })
+          'focus:outline-none'
         )}
       >
         {children}
