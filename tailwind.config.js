@@ -2,7 +2,17 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          light: '#63C1FF',
+          default: '#1492E6',
+          dark: '#1283CE',
+        },
+      },
+    },
+    backgroundColor: (theme) => theme('colors'),
+    backgroundOpacity: (theme) => theme('opacity'),
     boxShadow: {
       xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
       sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
@@ -22,6 +32,14 @@ module.exports = {
   },
   variants: {
     extend: {},
+    backgroundColor: [
+      'responsive',
+      'hover',
+      'focus',
+      'active',
+      'focus-within',
+      'group-focus',
+      'group-hover',
+    ],
   },
-  plugins: [],
 };

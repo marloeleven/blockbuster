@@ -7,6 +7,9 @@ import { Button } from 'reakit/Button';
 import { Dialog, useDialogState, Close } from './dialog';
 
 import clsx from 'clsx';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { IModalManagerActions } from 'types';
 
 interface ModalManagerContextType {
   showModal: (args: IModalArgs) => Promise<any>;
@@ -73,6 +76,12 @@ const defaultModalState: IModalState = {
   },
 };
 
+export const modalManager$ = new Subject();
+
+const onModalManager$ = modalManager$.pipe(
+  map((action) => action as IModalManagerActions)
+);
+
 const ModalManager: React.FC<{}> = ({ children }) => {
   const okButtonRef = useRef<HTMLButtonElement>(null);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
@@ -121,6 +130,16 @@ const ModalManager: React.FC<{}> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    onModalManager$.subscribe((action) => {
+      if (action === IModalManagerActions.OK) {
+        return acceptButton();
+      }
+
+      closeModal();
+    });
+  }, [acceptButton, closeModal]);
+
+  useEffect(() => {
     if (modalState.isOpen && okButtonRef.current && cancelButtonRef.current) {
       if (modalState.okButton.autoFocus) {
         return okButtonRef.current.focus();
@@ -154,7 +173,7 @@ const ModalManager: React.FC<{}> = ({ children }) => {
       >
         <div className="confirmation-modal py-3 px-4 w-2/4">
           {/* Title */}
-          <div className="bg-secondary-900 items-center -mx-4 -mt-4 my-4 py-1 px-2 flex justify-between">
+          <div className="bg-blue-400 items-center -mx-4 -mt-4 my-4 py-1 px-2 flex justify-between">
             <p className="text-sm text-white">{modalState.title}</p>
             <Close onClick={closeModal} />
           </div>

@@ -189,6 +189,11 @@ svg path {
   background-color: #db3456;
 }
 
+.button.open-game-window:disabled {
+  @apply bg-gray-500;
+  cursor: auto;
+}
+
 .list {
   background-color: blanchedalmond;
   color: #000;

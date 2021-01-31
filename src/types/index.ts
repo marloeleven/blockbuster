@@ -23,3 +23,8 @@ export enum ITeams {
 }
 
 export type IFunction = (...args: any[]) => any;
+
+export enum IModalManagerActions {
+  OK = 'ok',
+  CANCEL = 'cancel',
+}

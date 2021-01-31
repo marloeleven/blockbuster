@@ -21,7 +21,7 @@ export const Close = React.forwardRef<
       tabIndex={0}
       {...props}
       className={clsx(
-        'btn btn-ghost btn-secondary rounded-full',
+        'btn btn-ghost rounded-full',
         'p-1 cursor-pointer z-50',
         props.className
       )}
@@ -76,7 +76,7 @@ const Dialog: React.FC<IDialogProps> = ({
     <DialogBackdrop
       {...props}
       className={cx(
-        'fixed left-0 bottom-0 right-0 overflow-auto z-50 bg-gray-900 transition-colors duration-300 ease-in modal bg-opacity-75 h-full'
+        'absolute left-0 bottom-0 right-0 overflow-auto z-50 bg-gray-900 transition-colors duration-300 ease-in modal bg-opacity-75 h-full'
       )}
     >
       <RKDialog
