@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React, { useCallback, useContext, useMemo } from 'react';
-import _ from 'lodash/fp';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as appActions from 'app/slices/app';
@@ -131,9 +130,9 @@ export const GameContext = React.createContext<IGameContext>({
 
 export default function Game() {
   const lettersArray = useSelector(appActions.get.letters);
-  const question = useSelector(appActions.get.question);
-  const isQuestionVisible = useSelector(appActions.get.isQuestionVisible);
-  const isAnswerVisible = useSelector(appActions.get.isAnswerVisible);
+  // const question = useSelector(appActions.get.question);
+  // const isQuestionVisible = useSelector(appActions.get.isQuestionVisible);
+  // const isAnswerVisible = useSelector(appActions.get.isAnswerVisible);
 
   const dispatch = useDispatch();
 

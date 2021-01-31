@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { red } from 'chalk';
 import { ITeams } from 'types';
 import { generateLettersArray, hasKey } from 'utils/helpers';
 

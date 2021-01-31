@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import clsx from 'clsx';
-import { css } from 'emotion/macro';
 
 import withBaseModal, { BaseModalArgs } from 'components/base-modal';
 

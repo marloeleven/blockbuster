@@ -1,4 +1,3 @@
-import { EventEmitter } from 'events';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IGameWindowEvents } from 'types';

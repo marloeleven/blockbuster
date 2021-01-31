@@ -1,10 +1,12 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ITeams } from 'types';
+import messages from 'const/messages';
 
 import * as appActions from 'app/slices/app';
+import { ModalManagerContext } from 'components/modal-manager';
 import clsx from 'clsx';
 
 export default function BasicControl() {
@@ -19,6 +21,8 @@ export default function BasicControl() {
 
   const blueLetters = useSelector(appActions.get.blueLetters);
   const redLetters = useSelector(appActions.get.redLetters);
+
+  const modalManager = useContext(ModalManagerContext);
 
   const dispatch = useDispatch();
 
@@ -50,9 +54,17 @@ export default function BasicControl() {
     dispatch,
   ]);
 
-  const startGame = useCallback(() => dispatch(appActions.startGame()), [
-    dispatch,
-  ]);
+  const startGame = useCallback(() => {
+    modalManager
+      .showModal({
+        title: messages.gameStart.title,
+        message: messages.gameStart.message,
+      })
+      .then(() => {
+        dispatch(appActions.startGame());
+      })
+      .catch(() => {});
+  }, [dispatch, modalManager]);
   const endGame = useCallback(() => dispatch(appActions.endGame()), [dispatch]);
 
   const selectedLetterIsAssigned = useMemo(
@@ -61,6 +73,8 @@ export default function BasicControl() {
       redLetters.includes(selectedLetter),
     [blueLetters, redLetters, selectedLetter]
   );
+
+  console.warn('isRunning', isRunning);
 
   return (
     <div className="basic-controls p-5 flex flex-col flex-grow">
@@ -135,13 +149,13 @@ export default function BasicControl() {
       <div className="main">
         <div className="float-right flex flex-col">
           <button
-            className={clsx('button', { hidden: isRunning })}
+            className={clsx('button', { hidden: !isRunning })}
             onClick={endGame}
           >
             END GAME
           </button>
           <button
-            className={clsx('button', { hidden: !isRunning })}
+            className={clsx('button', { hidden: isRunning })}
             onClick={startGame}
           >
             START GAME

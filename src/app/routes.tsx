@@ -22,10 +22,12 @@ const routes: IPage[] = [
   },
 ];
 
-export default () => (
-  <>
-    {routes.map((route) => (
-      <Route key={route.path} {...route} />
-    ))}
-  </>
-);
+export default function Routes() {
+  return (
+    <>
+      {routes.map((route) => (
+        <Route key={route.path} {...route} />
+      ))}
+    </>
+  );
+}

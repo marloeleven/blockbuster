@@ -1,6 +1,3 @@
-import chunk from 'lodash/chunk';
-import { LETTERS } from 'const';
-
 export const generateLettersArray = (rows: number, columns: number) => {
   // const letters = LETTERS.split('');
 

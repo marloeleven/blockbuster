@@ -1,0 +1,11 @@
+@import-normalize;
+
+@tailwind base;
+
+@tailwind components;
+
+@import './css/index.css';
+
+@tailwind utilities;
+
+/* @import './css/button.css'; */
