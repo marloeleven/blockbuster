@@ -152,7 +152,7 @@ export default function () {
     >
       <div className="relative">
         <Hexagons lettersArray={lettersArray} />;
-        <QuestionModal />
+        <QuestionModal defaultStyle={false} className="h-2/4" />
       </div>
     </GameContext.Provider>
   );
