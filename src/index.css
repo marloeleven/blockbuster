@@ -1,3 +1,5 @@
+@import 'https://fonts.googleapis.com/css?family=Rubik+One';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  user-select: none;
 }
 
 code {
@@ -16,28 +18,72 @@ code {
 html,
 body,
 #root,
-.game {
+.game,
+.controls {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
-/* GRID */
+/* GAME */
+:root {
+  --blue: #066bbb;
+  --red: #920004;
+}
+
+/* GAME RENDER CONDITIONS */
+
+.controls .item {
+  width: 8vh;
+  margin-right: 0.3vh;
+}
+
+.controls .row {
+  margin-top: -2vh;
+}
+
+.controls .row:nth-child(2n) .item:first-child {
+  margin-left: 4.15vh;
+}
+
+/* GAME RENDER CONDITIONS END */
 
 .game {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transform: scale(1.3);
+  background-color: black;
 }
 
 .item {
-  --aspect-ratio: 4/3;
   height: 0;
   height: 100%;
-  width: 13vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  width: 14.3vh;
+  margin-right: 1vh;
+}
+
+.row:nth-child(2n) .item:first-child {
+  margin-left: 7.6vh;
+}
+
+.item.letter.selected:not(.red),
+.item.letter.selected:not(.blue) {
+  filter: drop-shadow(yellow 0px 0px 4px);
+}
+
+.item.letter.blue path {
+  fill: var(--blue);
+}
+
+.item.letter.blue .textContainer,
+.item.letter.red .textContainer {
+  display: none;
+}
+
+.item.letter.red path {
+  fill: var(--red);
 }
 
 .row {
@@ -46,16 +92,8 @@ body,
   margin-top: -3vh;
 }
 
-.row:nth-child(2n) .item:first-child {
-  margin-left: 7vh;
-}
-
 .row:first-child {
   margin-top: auto;
-}
-
-.row .item {
-  margin-right: 1vh;
 }
 
 .row .item:last-child {
@@ -64,7 +102,7 @@ body,
 
 .row:nth-child(1n + 2) .item:first-child path,
 .row:nth-child(1n + 2) .item:last-child path {
-  fill: #066bbb;
+  fill: var(--blue);
 }
 
 .row:first-child path,
@@ -73,7 +111,7 @@ body,
 .row:last-child path,
 .row:last-child .item:first-child path,
 .row:last-child .item:last-child path {
-  fill: #920004;
+  fill: var(--red);
 }
 
 svg path {
@@ -96,36 +134,65 @@ svg path {
   justify-content: center;
 }
 
-.hex-grid__list {
-  --cols: 7;
-  list-style: none;
-  margin: 0;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+.item svg,
+.item .textContainer {
+  pointer-events: none;
 }
 
-/*
-.hex-grid__content {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: white;
-  clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
-  padding: 2rem 25%;
+/* CONTROL AREA */
+
+.controls {
+  background-color: #2d2d2d;
+  color: #f7fafc;
 }
 
-.hex-grid__list {
-  --amount: 5;
-  --counter: 1;
-  display: grid;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: repeat(var(--amount), 1fr, 2fr) 1fr;
-  grid-gap: 1rem 2rem;
+.controls .game-container {
+  height: 500px;
+  overflow: hidden;
 }
-*/
+
+.controls .right {
+  width: 40%;
+}
+
+/* BUTTONS */
+
+.button::after,
+.button::before {
+  content: '';
+  transition: all 0.5s;
+}
+
+.button {
+  display: inline-block;
+  padding: 20px 40px;
+  color: white;
+  vertical-align: middle;
+  font-family: 'Rubik One', sans-serif;
+  text-decoration: none;
+  font-size: 2vh;
+  background-color: #616161;
+  border: 2px solid #fff;
+}
+
+.button.red {
+  background-color: var(--red);
+}
+
+.button.blue {
+  background-color: var(--blue);
+}
+
+.button.open-game-window {
+  background-color: #db3456;
+}
+
+.list {
+  background-color: blanchedalmond;
+  color: #000;
+  font-weight: bold;
+  padding: 1em;
+}
+
+.list li {
+}

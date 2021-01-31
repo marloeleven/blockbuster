@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Home from 'containers/home';
+import Game from 'containers/game';
 
 interface IPage {
   exact?: boolean;
@@ -10,10 +11,10 @@ interface IPage {
 }
 
 const routes: IPage[] = [
-  // {
-  //   path: '/page',
-  //   component: Page,
-  // },
+  {
+    path: '/game',
+    component: Game,
+  },
   {
     exact: true,
     path: '/',

@@ -1,5 +1,5 @@
 import React from 'react';
 
-import Game from './game';
+import Controls from './controls';
 
-export default () => <Game />;
+export default () => <Controls />;

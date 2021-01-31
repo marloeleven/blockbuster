@@ -8,13 +8,14 @@ import { switchMap } from 'rxjs/operators';
 
 import * as appActions from 'app/slices/app';
 
-const setLoginEpic: Epic<Action, Action, RootState> = (action$, state$) =>
+const startGameEpic: Epic<Action, Action, RootState> = (action$, state$) =>
   action$.pipe(
-    ofType(appActions.setLoginState),
+    ofType(appActions.startGame),
     switchMap(() =>
       defer(() => Promise.resolve(true)).pipe(switchMap(() => empty()))
     )
   );
+
 /*
 Sample page redirection after triggering an action
 
@@ -48,4 +49,4 @@ const setPageIdEpic: Epic<Action, Action, RootState> = (action$, state$) =>
 
 */
 
-export default combineEpics(setLoginEpic);
+export default combineEpics(startGameEpic);
