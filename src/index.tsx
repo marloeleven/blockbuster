@@ -11,7 +11,6 @@ import Loader from 'containers/loader';
 import App from './App';
 
 import './index.css';
-import './tailwind.css';
 import { ConnectedRouter } from 'connected-react-router';
 
 ReactDOM.render(

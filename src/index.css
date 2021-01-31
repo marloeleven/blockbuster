@@ -1,5 +1,8 @@
 @import 'https://fonts.googleapis.com/css?family=Rubik+One';
 
+@tailwind base;
+@tailwind components;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -196,3 +199,5 @@ svg path {
 
 .list li {
 }
+
+@tailwind utilities;
