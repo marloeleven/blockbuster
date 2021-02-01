@@ -1,12 +1,13 @@
 import clsx from 'clsx';
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as appActions from 'app/slices/app';
-import { IFunction } from 'types';
+import { IBroadcastChannels, IFunction } from 'types';
 import noop from 'lodash/noop';
 
 import QuestionModal from 'components/modals/question';
+import { createMessageChannel } from 'observables/broadcast-channel';
 
 interface IGenerateItem {
   letter: string;
@@ -108,6 +109,7 @@ const Hexagons = ({ lettersArray }: IHexagonArgs) => {
       <div
         className={clsx(
           {
+            'pointer-events-none': isGameRoute,
             'blink-blue': isBlueBlinking,
             'blink-red': isRedBlinking,
           },
@@ -128,11 +130,12 @@ export const GameContext = React.createContext<IGameContext>({
   onSelectLetter: noop,
 });
 
+const eventListener$ = createMessageChannel(IBroadcastChannels.MAIN);
+
+const isGameRoute = window.location.pathname.includes('game');
+
 export default function Game() {
   const lettersArray = useSelector(appActions.get.letters);
-  // const question = useSelector(appActions.get.question);
-  // const isQuestionVisible = useSelector(appActions.get.isQuestionVisible);
-  // const isAnswerVisible = useSelector(appActions.get.isAnswerVisible);
 
   const dispatch = useDispatch();
 
@@ -142,6 +145,17 @@ export default function Game() {
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    if (isGameRoute) {
+      const sub = eventListener$.subscribe((data) => {
+        console.warn('recieved', data);
+        dispatch(data);
+      });
+
+      return () => sub.unsubscribe();
+    }
+  }, [dispatch]);
 
   return (
     <GameContext.Provider
