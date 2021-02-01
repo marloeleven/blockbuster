@@ -70,6 +70,11 @@ body,
   margin-left: 7.6vh;
 }
 
+.row:first-child .item:first-child,
+.row:last-child .item:first-child {
+  opacity: 0;
+}
+
 .item.letter.selected:not(.red),
 .item.letter.selected:not(.blue) {
   filter: drop-shadow(yellow 0px 0px 4px);

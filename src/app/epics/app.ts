@@ -20,7 +20,7 @@ const isControl = (action: any[]) =>
 
 const sender = createSenderChannel(IBroadcastChannels.MAIN);
 
-const relayEpic: Epic<Action, Action, RootState> = (action$, state$) =>
+const relayActionsEpic: Epic<Action, Action, RootState> = (action$, state$) =>
   action$.pipe(
     isControl([
       appActions.startGame,
@@ -35,4 +35,4 @@ const relayEpic: Epic<Action, Action, RootState> = (action$, state$) =>
     ])
   );
 
-export default combineEpics(relayEpic);
+export default combineEpics(relayActionsEpic);
