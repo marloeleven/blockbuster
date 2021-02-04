@@ -1,5 +1,11 @@
 import clsx from 'clsx';
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as appActions from 'app/slices/app';
@@ -8,6 +14,8 @@ import noop from 'lodash/noop';
 
 import QuestionModal from 'components/modals/question';
 import { createMessageChannel } from 'observables/broadcast-channel';
+import { onResyncAnimation$ } from 'handlers/subscriptions';
+import { map, tap, filter, delay } from 'rxjs/operators';
 
 interface IGenerateItem {
   letter: string;
@@ -135,6 +143,7 @@ const eventListener$ = createMessageChannel(IBroadcastChannels.MAIN);
 const isGameRoute = window.location.pathname.includes('game');
 
 export default function Game() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const lettersArray = useSelector(appActions.get.letters);
 
   const dispatch = useDispatch();
@@ -148,14 +157,29 @@ export default function Game() {
 
   useEffect(() => {
     if (isGameRoute) {
-      const sub = eventListener$.subscribe((data) => {
-        console.warn('recieved', data);
-        dispatch(data);
-      });
+      const sub = eventListener$.subscribe(dispatch);
 
       return () => sub.unsubscribe();
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    const resyncSub = onResyncAnimation$
+      .pipe(
+        map(() => containerRef.current as HTMLDivElement),
+        filter((container) => Boolean(container)),
+        tap((container) => {
+          console.warn('1');
+          container.classList.add('stop-animation');
+        }),
+        delay(50)
+      )
+      .subscribe((container) => {
+        container.classList.remove('stop-animation');
+      });
+
+    return () => resyncSub.unsubscribe();
+  }, [containerRef]);
 
   return (
     <GameContext.Provider
@@ -163,7 +187,7 @@ export default function Game() {
         onSelectLetter,
       }}
     >
-      <div className="relative">
+      <div className="relative" ref={containerRef}>
         <Hexagons lettersArray={lettersArray} />;
         <QuestionModal
           defaultStyle={false}

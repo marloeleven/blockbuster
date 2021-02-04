@@ -1,5 +1,5 @@
 import { fromEvent, merge, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 import { IGameWindowEvents } from 'types';
 
 export const gameWindow$ = new Subject();
@@ -15,3 +15,6 @@ merge(
     event.preventDefault();
   }
 });
+
+export const resyncAnimation$ = new Subject();
+export const onResyncAnimation$ = resyncAnimation$.pipe(debounceTime(250));
