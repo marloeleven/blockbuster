@@ -1,0 +1,78 @@
+ACTIONS
+
+open game window - will spawn the game on the new window
+   - will be disabled when game window is opened
+   - will show blinking tiles when start game has not been clicked
+   - will reload state if there is a progress
+
+start game - will trigger the game to start
+  - disabled when game is running
+  - add listener to opened window to identify if game window is closed
+    -- start game when there is no progress
+
+restart game - will reset the game, add confirmation dialog
+  - will reset game and require start button to be pressed
+
+row (default: 5) - number of rows to be drawn
+
+column (default: 5) - number of column to be drawn
+
+manual blink button for blue - signifies blue can win
+
+manual blink button for red - signified red can win
+
+actions list undoing
+  [x] blue answer letter "B" coordinate [3,4]
+  [x] blue answer letter "C" coordinate [3,2]
+  [x] blue answer letter "T" coordinate [4,1]
+
+ click X to return back to this state, spawn a dialog for confirmation
+
+tile in game can be clicked and a dialog will appear to choose what color answers the question
+
+end game - will show modal and choost winner
+  - game window will display
+
+settings button - modal will display number of rows and column
+  - on save, game will restart
+
+show question - will enable when a letter is click
+
+on letter select - add indicator of letter selection
+
+
+//
+
+on game start. random first letter blinks
+
+next letter will be chosen by the contestant who guessed the answer correctly
+
+when both contestants answered wrong on a letter, new question will be shown with same beginning letter of the answer
+
+
+
+TODO
+
+window control
+  * use data channel to listen to unload event
+
+clickable letter
+  
+implement undo
+
+
+blinking buttons
+blinking hexagons
+
+initializing game interface
+  - random hexagon colors
+  - any loading UI
+
+
+modal for show answer
+modal for set winner
+modal for end game
+
+
+app history
+connect to google sheet
