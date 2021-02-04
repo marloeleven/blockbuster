@@ -168,10 +168,7 @@ export default function Game() {
       .pipe(
         map(() => containerRef.current as HTMLDivElement),
         filter((container) => Boolean(container)),
-        tap((container) => {
-          console.warn('1');
-          container.classList.add('stop-animation');
-        }),
+        tap((container) => container.classList.add('stop-animation')),
         delay(50)
       )
       .subscribe((container) => {

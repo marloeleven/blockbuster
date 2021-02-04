@@ -38,7 +38,13 @@ const relayActionsEpic: Epic<Action, Action, RootState> = (action$, state$) =>
 
 const animationSyncEpic: Epic<Action, Action, RootState> = (action$, state$) =>
   action$.pipe(
-    ofType(...[appActions.assignLetter, appActions.removeLetter]),
+    ofType(
+      ...[
+        appActions.assignLetter,
+        appActions.removeLetter,
+        appActions.toggleBlink,
+      ]
+    ),
     tap(() => resyncAnimation$.next()),
     ignoreElements()
   );
