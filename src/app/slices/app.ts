@@ -53,13 +53,17 @@ export const appSlice = createSlice({
   reducers: {
     startGame: (state) => {
       state.isRunning = true;
-      state.letters = generateLettersArray(5, 5);
     },
     endGame: (state) => {
-      Object.assign(state, initialState, { letters: state.letters });
+      const { letters, questionsList } = state;
+
+      Object.assign(state, initialState, { letters, questionsList });
     },
     setQuestionsList: (state, { payload }: PayloadAction<IQuestion[]>) => {
       state.questionsList = payload;
+    },
+    setLetters: (state, { payload }: PayloadAction<string[][]>) => {
+      state.letters = payload;
     },
     setSelectedLetter: (state, { payload }: PayloadAction<string>) => {
       state.selectedLetter = payload;
@@ -124,6 +128,7 @@ export const {
   endGame,
   setQuestionsList,
   setQuestion,
+  setLetters,
   setSelectedLetter,
   toggleShowQuestion,
   toggleShowAnswer,

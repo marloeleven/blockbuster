@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as appActions from 'app/slices/app';
 import clsx from 'clsx';
-import questions from 'handlers/questions';
 
 export default function QuestionsList() {
   const selectedLetter = useSelector(appActions.get.selectedLetter);

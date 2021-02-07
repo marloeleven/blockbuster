@@ -145,6 +145,7 @@ const isGameRoute = window.location.pathname.includes('game');
 export default function Game() {
   const containerRef = useRef<HTMLDivElement>(null);
   const lettersArray = useSelector(appActions.get.letters);
+  const isRunning = useSelector(appActions.get.isRunning);
 
   const dispatch = useDispatch();
 
@@ -184,7 +185,10 @@ export default function Game() {
         onSelectLetter,
       }}
     >
-      <div className="relative" ref={containerRef}>
+      <div
+        className={clsx({ started: isRunning }, 'relative game-area')}
+        ref={containerRef}
+      >
         <Hexagons lettersArray={lettersArray} />;
         <QuestionModal
           defaultStyle={false}

@@ -73,7 +73,7 @@ modal for show answer
 modal for set winner
 modal for end game
 
+connect to google sheet - done
 
-app history
-connect to google sheet
+
 overlay on game to press start game

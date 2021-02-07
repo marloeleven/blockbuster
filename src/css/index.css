@@ -173,6 +173,37 @@ body,
   animation: none !important;
 }
 
+/*
+
+
+.game-area:before,
+.game-area:after {
+  content: ' ';
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  z-index: 3;
+  transition: left 1.5s ease-in-out, right 1.5s ease-in-out;
+  top: 0;
+  background-color: #000;
+}
+
+.game-area.started::before {
+  left: -50%;
+}
+
+.game-area:not(.started):before {
+  left: 0;
+}
+
+.game-area:not(.started):after {
+  right: 0;
+}
+
+.game-area.started::after {
+  right: -50%;
+}
+*/
 /* ANIMATIONS END */
 
 .row:nth-child(2n) .item:first-child {

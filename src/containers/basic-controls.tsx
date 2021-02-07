@@ -19,6 +19,7 @@ import Winner from 'components/modals/winner';
 import Congrats from 'components/modals/congrats';
 import { onResyncAnimation$ } from 'handlers/subscriptions';
 import { delay, filter, map, tap } from 'rxjs/operators';
+import { generateLettersArray } from 'utils/helpers';
 
 export default function BasicControl() {
   const isRunning = useSelector(appActions.get.isRunning);
@@ -103,6 +104,7 @@ export default function BasicControl() {
       .then(() => {
         dispatch(appActions.endGame());
         dispatch(appActions.startGame());
+        dispatch(appActions.setLetters(generateLettersArray(5, 5)));
       })
       .catch(() => dispatch(appActions.endGame()));
   }, [dispatch, modalManager]);
@@ -121,6 +123,7 @@ export default function BasicControl() {
       })
       .then(() => {
         dispatch(appActions.startGame());
+        dispatch(appActions.setLetters(generateLettersArray(5, 5)));
       })
       .catch(() => {});
   }, [dispatch, modalManager]);
