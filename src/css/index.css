@@ -28,6 +28,25 @@
   }
 }
 
+@keyframes blinkBlueButton {
+  from {
+    background-color: var(--blue);
+  }
+
+  to {
+    background-color: var(--blue-blink);
+  }
+}
+
+@keyframes blinkRedButton {
+  from {
+    background-color: var(--red);
+  }
+  to {
+    background-color: var(--red-blink);
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -137,6 +156,16 @@ body,
 
 .item.letter.selected:not(.red):not(.blue) svg path {
   animation: blinkselected 0.5s linear 0.1s infinite alternate;
+  transition: none;
+}
+
+.basic-controls .blue.blink-active {
+  animation: blinkBlueButton 0.5s linear 0.1s infinite alternate;
+  transition: none;
+}
+
+.basic-controls .red.blink-active {
+  animation: blinkRedButton 0.5s linear 0.1s infinite alternate;
   transition: none;
 }
 

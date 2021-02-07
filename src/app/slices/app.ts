@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { ITeams } from 'types';
+import { ITeams, IQuestion } from 'types';
 import { generateLettersArray, hasKey } from 'utils/helpers';
 
 interface IBlinkers {
   red: boolean;
   blue: boolean;
 }
+
 interface AppState {
   letters: string[][];
   blueLetters: string[];
@@ -19,7 +20,8 @@ interface AppState {
   showQuestion: boolean;
   showAnswer: boolean;
 
-  question: [string, string];
+  questionsList: IQuestion[];
+  question: IQuestion;
 
   blinkers: IBlinkers;
 }
@@ -36,7 +38,8 @@ const initialState: AppState = {
   showQuestion: false,
   showAnswer: false,
 
-  question: ['What is my name?', 'Marlo Dela Torre'], // [question, answer]
+  questionsList: [],
+  question: { answer: 'Unassigned', question: 'No question available' }, // [question, answer]
 
   blinkers: {
     red: false,
@@ -50,18 +53,21 @@ export const appSlice = createSlice({
   reducers: {
     startGame: (state) => {
       state.isRunning = true;
+      state.letters = generateLettersArray(5, 5);
     },
     endGame: (state) => {
-      Object.assign(state, initialState);
+      Object.assign(state, initialState, { letters: state.letters });
     },
-    setLetters: (state, { payload }: PayloadAction<string[][]>) => {
-      state.letters = payload;
+    setQuestionsList: (state, { payload }: PayloadAction<IQuestion[]>) => {
+      state.questionsList = payload;
     },
     setSelectedLetter: (state, { payload }: PayloadAction<string>) => {
       state.selectedLetter = payload;
       state.showAnswer = false;
     },
-    setQuestion: (state, { payload }: PayloadAction<[string, string]>) => {
+    setQuestion: (state, { payload }: PayloadAction<IQuestion>) => {
+      state.showQuestion = false;
+      state.showAnswer = false;
       state.question = payload;
     },
     toggleShowQuestion: (state) => {
@@ -116,7 +122,8 @@ export const appSlice = createSlice({
 export const {
   startGame,
   endGame,
-  setLetters,
+  setQuestionsList,
+  setQuestion,
   setSelectedLetter,
   toggleShowQuestion,
   toggleShowAnswer,
@@ -127,6 +134,7 @@ export const {
 
 export const get = {
   letters: (state: RootState) => state.app.letters,
+  questionsList: (state: RootState) => state.app.questionsList,
   isRunning: (state: RootState) => state.app.isRunning,
   selectedLetter: (state: RootState) => state.app.selectedLetter,
   isQuestionVisible: (state: RootState) => state.app.showQuestion,

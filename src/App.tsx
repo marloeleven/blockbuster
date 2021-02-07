@@ -8,14 +8,12 @@ interface IAppContext {}
 
 export const AppContext = React.createContext<IAppContext>({});
 
-const App: React.FC = () => {
-  return (
-    <AppContext.Provider value={{}}>
-      <ModalManager>
-        <Routes />
-      </ModalManager>
-    </AppContext.Provider>
-  );
-};
+const App: React.FC = () => (
+  <AppContext.Provider value={{}}>
+    <ModalManager>
+      <Routes />
+    </ModalManager>
+  </AppContext.Provider>
+);
 
 export default App;

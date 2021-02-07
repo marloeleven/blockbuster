@@ -76,3 +76,4 @@ modal for end game
 
 app history
 connect to google sheet
+overlay on game to press start game

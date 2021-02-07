@@ -28,3 +28,8 @@ export enum IModalManagerActions {
   OK = 'ok',
   CANCEL = 'cancel',
 }
+
+export interface IQuestion {
+  answer: string;
+  question: string;
+}

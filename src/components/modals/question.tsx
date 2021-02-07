@@ -14,7 +14,7 @@ export const QuestionModal: React.FC<BaseModalArgs> = ({
 }) => {
   const isQuestionVisible = useSelector(appActions.get.isQuestionVisible);
   const isAnswerVisible = useSelector(appActions.get.isAnswerVisible);
-  const [question, answer] = useSelector(appActions.get.question);
+  const { question, answer } = useSelector(appActions.get.question);
 
   useEffect(() => {
     setIsOpen(isQuestionVisible);
@@ -23,8 +23,8 @@ export const QuestionModal: React.FC<BaseModalArgs> = ({
   return (
     <>
       <div className="game-question question">
-        <span className="mb-4 mt-2">Question:</span>
-        <p>{question}</p>
+        <span className="mb-4 mt-2 font-medium text-base">Question:</span>
+        <p className="font-medium text-lg">{question}</p>
       </div>
 
       <div
@@ -33,8 +33,8 @@ export const QuestionModal: React.FC<BaseModalArgs> = ({
           'game-answer question'
         )}
       >
-        <span>Answer:</span>
-        <p>{answer}</p>
+        <span className="font-medium text-base">Answer:</span>
+        <p className="font-medium text-lg">{answer}</p>
       </div>
     </>
   );

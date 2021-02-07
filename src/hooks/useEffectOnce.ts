@@ -1,4 +1,8 @@
 import { useEffect } from 'react';
+import { IFunction } from 'types';
 
-export default (callback: React.EffectCallback) =>
-  useEffect(() => callback(), []);
+export default function useEffectOnce(callback: IFunction) {
+  useEffect(() => {
+    callback();
+  }, []);
+}

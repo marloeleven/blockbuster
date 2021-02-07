@@ -5,7 +5,7 @@ const LOADING = 'loading';
 const ERROR = 'error';
 const SUCCESS = 'success';
 
-export default (promise: any) => {
+export default function useFecth(promise: any) {
   const [status, setStatus] = useState<string>(LOADING);
   const [result, setResult] = useState<any>();
   const [suspender, setSuspender] = useState<Promise<any>>(
@@ -40,4 +40,4 @@ export default (promise: any) => {
       }
     },
   };
-};
+}

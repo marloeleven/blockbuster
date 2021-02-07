@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
@@ -11,6 +17,8 @@ import * as appActions from 'app/slices/app';
 import { modalManager$, ModalManagerContext } from 'components/modal-manager';
 import Winner from 'components/modals/winner';
 import Congrats from 'components/modals/congrats';
+import { onResyncAnimation$ } from 'handlers/subscriptions';
+import { delay, filter, map, tap } from 'rxjs/operators';
 
 export default function BasicControl() {
   const isRunning = useSelector(appActions.get.isRunning);
@@ -26,6 +34,8 @@ export default function BasicControl() {
   const redLetters = useSelector(appActions.get.redLetters);
 
   const modalManager = useContext(ModalManagerContext);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
@@ -140,10 +150,26 @@ export default function BasicControl() {
     [blueLetters, redLetters, selectedLetter]
   );
 
-  console.warn('isRunning', isRunning);
+  useEffect(() => {
+    const resyncSub = onResyncAnimation$
+      .pipe(
+        map(() => containerRef.current as HTMLDivElement),
+        filter((container) => Boolean(container)),
+        tap((container) => container.classList.add('stop-animation')),
+        delay(50)
+      )
+      .subscribe((container) => {
+        container.classList.remove('stop-animation');
+      });
+
+    return () => resyncSub.unsubscribe();
+  }, [containerRef]);
 
   return (
-    <div className="basic-controls p-5 flex flex-col flex-grow">
+    <div
+      ref={containerRef}
+      className="basic-controls p-5 flex flex-col flex-grow"
+    >
       <div className="basic flex-grow">
         <div className={clsx({ hidden: !isRunning })}>
           <h3>Blinkers</h3>

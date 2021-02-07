@@ -1,14 +1,22 @@
-export const generateLettersArray = (rows: number, columns: number) => {
-  // const letters = LETTERS.split('');
+import chunk from 'lodash/chunk';
 
-  // const total = rows * columns;
+import { LETTERS } from 'const';
 
-  // const shuffledLetters = Array(total)
-  //   .fill('')
-  //   .map(() => letters.splice(getRandom.indexFromArray(letters), 1).pop());
+export const generateLettersArray = (
+  rows: number,
+  columns: number
+): string[][] => {
+  const letters = LETTERS.split('');
 
-  // return chunk(shuffledLetters, rows);
+  const total = rows * columns;
 
+  const shuffledLetters = Array(total)
+    .fill('')
+    .map(() => letters.splice(getRandom.indexFromArray(letters), 1).pop());
+
+  const lettersArray = chunk(shuffledLetters, rows) as string[][];
+
+  /*
   const lettersArray = [
     ['H', 'V', 'I', 'Y', 'A'],
     ['N', 'L', 'Q', 'X', 'D'],
@@ -16,6 +24,7 @@ export const generateLettersArray = (rows: number, columns: number) => {
     ['T', 'W', 'B', 'P', 'J'],
     ['R', 'K', 'C', 'F', 'E'],
   ];
+  */
 
   lettersArray.map((colLettersArray: string[]) => {
     colLettersArray.unshift('');

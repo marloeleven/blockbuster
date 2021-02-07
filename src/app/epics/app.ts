@@ -24,7 +24,6 @@ const relayActionsEpic: Epic<Action, Action, RootState> = (action$, state$) =>
     isControl([
       appActions.startGame,
       appActions.endGame,
-      appActions.setLetters,
       appActions.setSelectedLetter,
       appActions.toggleShowQuestion,
       appActions.toggleShowAnswer,
