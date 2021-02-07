@@ -52,7 +52,8 @@
     "build:docs": "craco build && rm -rf docs && mv build docs",
     "test": "craco test",
     "tailwind": "tailwindcss build src/css/tailwind.css -o src/index.css",
-    "run:build": "cd docs && python -m SimpleHTTPServer 7800"
+    "run:build": "cd build && python -m http.server",
+    "test:build": "yarn build && yarn run:build"
   },
   "eslintConfig": {
     "extends": "react-app"

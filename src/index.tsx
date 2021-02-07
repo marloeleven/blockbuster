@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { store, history } from 'app/store';
 
@@ -16,7 +16,7 @@ import { ConnectedRouter } from 'connected-react-router';
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <BrowserRouter basename="/">
+      <HashRouter>
         <Provider store={store}>
           <ConnectedRouter history={history}>
             <Suspense fallback={<Loader />}>
@@ -24,7 +24,7 @@ ReactDOM.render(
             </Suspense>
           </ConnectedRouter>
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
     </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')

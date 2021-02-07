@@ -20,6 +20,7 @@ import Congrats from 'components/modals/congrats';
 import { onResyncAnimation$ } from 'handlers/subscriptions';
 import { delay, filter, map, tap } from 'rxjs/operators';
 import { generateLettersArray } from 'utils/helpers';
+import { Link } from 'react-router-dom';
 
 export default function BasicControl() {
   const isRunning = useSelector(appActions.get.isRunning);
@@ -250,6 +251,9 @@ export default function BasicControl() {
       </div>
       <div className="main">
         <div className="float-right flex flex-col">
+          <a href="/game" target="_blank">
+            Game
+          </a>
           <button
             className={clsx('button bg-red-400', { hidden: !isRunning })}
             onClick={endGame}

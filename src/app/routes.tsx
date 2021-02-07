@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Home from 'containers/home';
 import Game from 'containers/game';
@@ -24,10 +24,10 @@ const routes: IPage[] = [
 
 export default function Routes() {
   return (
-    <>
+    <Switch>
       {routes.map((route) => (
         <Route key={route.path} {...route} />
       ))}
-    </>
+    </Switch>
   );
 }
