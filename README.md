@@ -12,33 +12,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+App was requested by a client and sadly was not used since COVID-19 issue was going insane at the time we're working out this project.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+FF. technology stack was used in the development of this project. I was kind of new to the ff. techonologies and was so interested in using it so I tried it here :).
 
-### `yarn build`
+- Typescript
+- RXJS (Redux observable) - a state management library based on redux with the power of RXJS
+- Broadcast Channel
+- Tailwindcss
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Details:
+  App is composed of 2 views, the controller view which has all the controls needed to interact with the game and the Game view which is a separate window to be displayed in the main Screen for players to see game related interface.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Preview:
+![alt text](https://github.com/marloeleven/dynamotion-blockbuster/blob/main/blockbuster.jpg?raw=true)
