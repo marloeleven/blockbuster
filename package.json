@@ -1,6 +1,6 @@
 {
-  "name": "react-boiler-plate",
-  "version": "0.1.0",
+  "name": "blockbuster",
+  "version": "1.0.0",
   "homepage": ".",
   "private": true,
   "dependencies": {

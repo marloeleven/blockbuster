@@ -25,4 +25,4 @@ Details:
   App is composed of 2 views, the controller view which has all the controls needed to interact with the game and the Game view which is a separate window to be displayed in the main Screen for players to see game related interface.
 
 Preview:
-![alt text](https://github.com/marloeleven/dynamotion-blockbuster/blob/main/blockbuster.jpg?raw=true)
+![alt text](https://github.com/marloeleven/blockbuster/blob/main/blockbuster.jpg?raw=true)

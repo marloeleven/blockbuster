@@ -42,7 +42,7 @@ function GameControls() {
       });
 
     return () => gameWindowSub.unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-row controls">
