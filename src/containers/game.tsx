@@ -1,19 +1,16 @@
 import clsx from 'clsx';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as appActions from 'app/slices/app';
-import { IBroadcastChannels, IFunction } from 'types';
+import { IBroadcastChannels, IFunction, IGameWindowEvents } from 'types';
 import noop from 'lodash/noop';
 
 import QuestionModal from 'components/modals/question';
-import { createMessageChannel } from 'observables/broadcast-channel';
+import {
+  createMessageChannel,
+  createSenderChannel,
+} from 'observables/broadcast-channel';
 import { onResyncAnimation$ } from 'handlers/subscriptions';
 import { map, tap, filter, delay } from 'rxjs/operators';
 
@@ -34,14 +31,8 @@ const GenerateItem: React.FC<IGenerateItem> = ({
   const blueLetters = useSelector(appActions.get.blueLetters);
   const redLetters = useSelector(appActions.get.redLetters);
 
-  const isBlue = useMemo(() => blueLetters.includes(letter), [
-    blueLetters,
-    letter,
-  ]);
-  const isRed = useMemo(() => redLetters.includes(letter), [
-    redLetters,
-    letter,
-  ]);
+  const isBlue = blueLetters.includes(letter);
+  const isRed = redLetters.includes(letter);
 
   const onSelectLetter = useCallback(() => {
     appContext.onSelectLetter(letter);
@@ -140,7 +131,9 @@ export const GameContext = React.createContext<IGameContext>({
 
 const eventListener$ = createMessageChannel(IBroadcastChannels.MAIN);
 
-const isGameRoute = window.location.pathname.includes('game');
+const sender = createSenderChannel(IBroadcastChannels.GAME);
+
+const isGameRoute = window.location.href.includes('game');
 
 export default function Game() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -160,7 +153,15 @@ export default function Game() {
     if (isGameRoute) {
       const sub = eventListener$.subscribe(dispatch);
 
-      return () => sub.unsubscribe();
+      sender(IGameWindowEvents.OPEN);
+
+      window.addEventListener('beforeunload', () => {
+        sender(IGameWindowEvents.CLOSE);
+      });
+
+      return () => {
+        sub.unsubscribe();
+      };
     }
   }, [dispatch]);
 

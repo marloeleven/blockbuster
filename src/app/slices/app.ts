@@ -3,6 +3,8 @@ import { RootState } from 'app/store';
 import { ITeams, IQuestion } from 'types';
 import { generateLettersArray, hasKey } from 'utils/helpers';
 
+import { questions } from 'const/questions';
+
 interface IBlinkers {
   red: boolean;
   blue: boolean;
@@ -38,7 +40,7 @@ const initialState: AppState = {
   showQuestion: false,
   showAnswer: false,
 
-  questionsList: [],
+  questionsList: questions,
   question: { answer: 'Unassigned', question: 'No question available' }, // [question, answer]
 
   blinkers: {
@@ -120,6 +122,7 @@ export const appSlice = createSlice({
 
       state.blueLetters.splice(index, 1);
     },
+    syncGameWindow: () => {},
   },
 });
 
@@ -135,6 +138,7 @@ export const {
   toggleBlink,
   assignLetter,
   removeLetter,
+  syncGameWindow,
 } = appSlice.actions;
 
 export const get = {

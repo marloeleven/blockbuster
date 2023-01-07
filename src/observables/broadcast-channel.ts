@@ -15,19 +15,3 @@ export const createSenderChannel = (channelName: IBroadcastChannels) => {
   const channel = new BroadcastChannel(channelName);
   return (message: any) => channel.postMessage(message);
 };
-
-/*
-  // Usage
-
-  const channel = createMessageChannel(IBroadcastChannels.GAME);
-  const subs = channel.subscribe((data) => {
-    // do something to `data`
-  });
-
-  // to close the channel
-  subs.unsubscribe();
-
-  const channel = createSenderChannel(IBroadcastChannels.GAME);
-  // send message to game
-  channel.send(data);
-*/

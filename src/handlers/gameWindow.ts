@@ -1,8 +1,3 @@
-import { IGameWindowEvents } from 'types';
-import { gameWindow$ } from './subscriptions';
-
-import { generatePath } from 'react-router';
-
 class GameWindow {
   windowInstance: Window | null = null;
 
@@ -15,8 +10,6 @@ class GameWindow {
       `${window.location.origin}/#/game`,
       '_blank'
     );
-
-    gameWindow$.next(IGameWindowEvents.OPEN);
 
     this.bindWindowEvents();
 
@@ -36,8 +29,6 @@ class GameWindow {
     }
 
     this.windowInstance = null;
-
-    gameWindow$.next(IGameWindowEvents.CLOSE);
   }
 }
 

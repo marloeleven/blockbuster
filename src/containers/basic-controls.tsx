@@ -20,7 +20,6 @@ import Congrats from 'components/modals/congrats';
 import { onResyncAnimation$ } from 'handlers/subscriptions';
 import { delay, filter, map, tap } from 'rxjs/operators';
 import { generateLettersArray } from 'utils/helpers';
-import { Link } from 'react-router-dom';
 
 export default function BasicControl() {
   const isRunning = useSelector(appActions.get.isRunning);
