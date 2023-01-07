@@ -7,7 +7,7 @@ class GameWindow {
     }
 
     this.windowInstance = window.open(
-      `${window.location.origin}/#/game`,
+      `${window.location.href}game`,
       '_blank'
     );
 
