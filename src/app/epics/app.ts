@@ -59,6 +59,11 @@ const syncGameWindowEpic: Epic<Action, Action, RootState> = (action$, state$) =>
         type: appActions.startGame.type,
       });
 
+      sender({
+        type: appActions.setLetters.type,
+        payload: app.letters,
+      });
+
       app.blueLetters.forEach((letter) => {
         sender({
           type: appActions.setSelectedLetter.type,
@@ -83,16 +88,6 @@ const syncGameWindowEpic: Epic<Action, Action, RootState> = (action$, state$) =>
         });
       });
 
-      sender({
-        type: appActions.setLetters.type,
-        payload: app.letters,
-      });
-
-      sender({
-        type: appActions.setSelectedLetter.type,
-        payload: app.selectedLetter,
-      });
-
       if (app.blinkers.blue) {
         sender({
           type: appActions.toggleBlink.type,
@@ -105,6 +100,30 @@ const syncGameWindowEpic: Epic<Action, Action, RootState> = (action$, state$) =>
           type: appActions.toggleBlink.type,
           payload: ITeams.RED,
         });
+      }
+
+      if (app.selectedLetter) {
+        sender({
+          type: appActions.setSelectedLetter.type,
+          payload: app.selectedLetter,
+        });
+
+        sender({
+          type: appActions.setQuestion.type,
+          payload: app.question,
+        });
+
+        if (app.showQuestion) {
+          sender({
+            type: appActions.toggleShowQuestion.type,
+          });
+        }
+
+        if (app.showAnswer) {
+          sender({
+            type: appActions.toggleShowAnswer.type,
+          });
+        }
       }
     }),
     ignoreElements()
